@@ -1,0 +1,24 @@
+<%= form_for @bot do |f| %>
+<div class="panel-body">
+  <div class="form-group">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit @bot.persisted? ? "Update bot" : "Create bot", class: "btn btn-primary" %>
+  </div>
+</div>
+
+<% if @bot.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bot.errors.count, "error") %> prohibited this bot from being saved:</h2>
+
+      <ul>
+      <% @bot.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<% end %>
