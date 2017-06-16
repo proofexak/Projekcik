@@ -1,15 +1,16 @@
 class BotsController < ApplicationController
+	before_action :authenticate_user!
 
 	def index
-		@bots = Bot.all
+		@bots = current_user.bots
 	end
 
 	def new
-		@bot = Bot.new
+		@bot = current_user.bots.new
 	end
 
 	def create
-		@bot = Bot.new(bot_params)
+		@bot = current_user.bots.new(bot_params)
 		
 		if @bot.save
 			redirect_to bots_path, notice: 'Bot was successfully created.'
@@ -19,11 +20,11 @@ class BotsController < ApplicationController
 	end
 
 	def edit
-		@bot = Bot.find(params[:id])
+		@bot = current_user.bots.find(params[:id])
 	end
 
 	def update
-		@bot = Bot.find(params[:id])
+		@bot = current_user.bots.find(params[:id])
 
 		if @bot.update(bot_params)
 			redirect_to bots_path, notice: 'Bot was successfully updated.'
@@ -33,14 +34,14 @@ class BotsController < ApplicationController
 	end
 
 	def destroy
-		@bot = Bot.find(params[:id])
+		@bot = current_user.bots.find(params[:id])
 		@bot.destroy
 
 		redirect_to bots_path, notice: 'Bot was successfully destroyed'
 	end
 
 	def show
-		@bot = Bot.find(params[:id])
+		@bot = current_bots.find(params[:id])
 	end
 
 	private
