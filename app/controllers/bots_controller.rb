@@ -41,7 +41,12 @@ class BotsController < ApplicationController
 	end
 
 	def show
-		@bot = current_bots.find(params[:id])
+		@bot = current_user.bots.find(params[:id])
+	end
+
+	def download
+		@bot = current_user.bots.find(params[:id])
+		send_data render_to_string('bots/download', layout: false), filename: "#{@bot.name}.ahk"
 	end
 
 	private

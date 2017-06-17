@@ -1,0 +1,51 @@
+=::bot()
+
+bot()
+{
+	while(true)
+	{ 
+	  <% first_building = @bot.buildings.first %>
+		MouseMove, <%= first_building.coordinates %>, 50
+		Sleep 200
+		Send, {Click down}
+		Sleep 200
+		<% @bot.buildings.where.not(id: first_building.id).each do |building| %>
+		MouseMove, <%= building.coordinates %>, 50
+		Sleep 200
+		<% end  %>
+		Send, {Click up}
+		Sleep 1000
+		<% @bot.buildings.where(type: 'production').each do |building| %>
+		MouseClick, Left, <%= building.coordinates %>
+		Sleep 500
+		MouseClick, Left, 430, 400
+		Sleep 500
+		<% end %>
+		Sleep 310000
+
+		i = 0
+
+		while(i < 11)
+		{
+			<% first_production = @bot.buildings.where(type: 'production').first %>
+			MouseMove, <%= first_production.coordinates %>, 50
+			Sleep 200
+			Send, {Click down}
+			Sleep 200
+			<% @bot.buildings.where(type: 'production').where.not(id: first_production.id).each do |building| %>
+			MouseMove, <%= building.coordinates %>, 50
+			Sleep 200
+			<% end %>
+			Send, {Click up}
+			Sleep 1000
+			<% @bot.buildings.where(type: 'production').each do |building| %>
+			MouseClick, Left, <%= building.coordinates %>
+			Sleep 500
+			MouseClick, Left, 430, 400
+			Sleep 500
+			<% end %>
+			Sleep 310000
+			i++
+		}
+	}
+}

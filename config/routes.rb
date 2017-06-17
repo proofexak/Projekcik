@@ -4,8 +4,12 @@ Rails.application.routes.draw do
   root 'home#index'
   get 'home/about'
   resources :bots do
+    member do
+      get 'download'
+    end
     resources :buildings
   end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
