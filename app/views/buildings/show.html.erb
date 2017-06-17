@@ -1,0 +1,18 @@
+<div class="panel panel-default">
+	<div class="panel-heading">Your selected building</div>
+	<div class="panel-body">
+		<p>
+  			<strong>Name:</strong>
+  			<%= @building.name %><br/>
+  			<strong>Type:</strong>
+  			<%= @building.type %><br/>
+  			<strong>Coordinates:</strong>
+  			<%= "#{@building.coordinate_x}, #{@building.coordinate_y}" %>
+		</p>
+	</div>
+
+	<div class="panel-footer">
+		<%= link_to 'Edit', edit_bot_building_path(@bot, @building) %> | 
+		<%= link_to 'Back', bot_buildings_path %>
+	</div>
+</div>
