@@ -46,13 +46,36 @@ class BotsController < ApplicationController
 
 	def download
 		@bot = current_user.bots.find(params[:id])
+
 		send_data render_to_string('bots/download', layout: false), filename: "#{@bot.name}.ahk"
 	end
+
+	def configuration
+    @bot = current_user.bots.find(params[:id])
+  end
+
+  def nextbtn
+  	@bot = current_user.bots.find(params[:id])
+  end
+
+  def nextbtnupdate
+  	@bot = current_user.bots.find(params[:id])
+
+  	if @bot.update(additional_bot_params)
+  		redirect_to configuration_bot_path, notice: 'Next button was successfully updated.'
+  	else
+  		render :nextbtn
+  	end
+  end
 
 	private
 
   def bot_params
-  	params.require(:bot).permit(:name)
+  	params.require(:bot).permit(:name, :coordinate_x, :coordinate_y)
+  end
+
+  def additional_bot_params
+  	params.require(:bot).permit(:next_x, :next_y, :tavern_x, :tavern_y)
   end
 
 end

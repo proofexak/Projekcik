@@ -6,8 +6,12 @@ Rails.application.routes.draw do
   resources :bots do
     member do
       get 'download'
+      get 'configuration'
+      get 'nextbtn'
+      patch 'nextbtnupdate'
     end
     resources :buildings
+    resources :friend_supports
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

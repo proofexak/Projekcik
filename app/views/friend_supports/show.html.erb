@@ -1,0 +1,14 @@
+<div class="panel panel-default">
+	<div class="panel-heading">Your selected friend</div>
+	<div class="panel-body">
+		<p>
+			<strong>Coordinates:</strong>
+  			<%= "#{@support.coordinates}" %>
+		</p>
+	</div>
+
+	<div class="panel-footer">
+		<%= link_to 'Edit', edit_bot_friend_support_path(@bot, @support) %> | 
+		<%= link_to 'Back', bot_friend_supports_path %>
+	</div>
+</div>

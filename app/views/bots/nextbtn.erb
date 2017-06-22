@@ -1,19 +1,23 @@
-<%= form_for @bot do |f| %>
+<%= form_for @bot, :url => nextbtnupdate_bot_path do |f| %>
 <div class="panel-body">
   <div class="form-group">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.label :next_x%><br>
+    <%= f.number_field :next_x %>
   </div>
   <div class="form-group">
-    <%= f.label :coordinate_x %><br>
-    <%= f.number_field :coordinate_x %>
+    <%= f.label :next_y %><br>
+    <%= f.number_field :next_y %>
   </div>
   <div class="form-group">
-    <%= f.label :coordinate_y %><br>
-    <%= f.number_field :coordinate_y %>
+    <%= f.label :tavern_x %><br>
+    <%= f.number_field :tavern_x %>
+  </div>
+  <div class="form-group">
+    <%= f.label :tavern_y %><br>
+    <%= f.number_field :tavern_y %>
   </div>
   <div class="actions">
-    <%= f.submit @bot.persisted? ? "Update bot" : "Create bot", class: "btn btn-primary" %>
+    <%= f.submit "Update Next button", class: "btn btn-primary" %>
   </div>
 </div>
 

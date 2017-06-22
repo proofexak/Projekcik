@@ -11,13 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170616133022) do
+ActiveRecord::Schema.define(version: 20170622162425) do
 
   create_table "bots", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.integer  "user_id"
+    t.integer  "coordinate_x"
+    t.integer  "coordinate_y"
+    t.integer  "tavern_x"
+    t.integer  "tavern_y"
+    t.integer  "next_x"
+    t.integer  "next_y"
   end
 
   add_index "bots", ["user_id"], name: "index_bots_on_user_id"
@@ -33,6 +39,16 @@ ActiveRecord::Schema.define(version: 20170616133022) do
   end
 
   add_index "buildings", ["bot_id"], name: "index_buildings_on_bot_id"
+
+  create_table "friend_supports", force: :cascade do |t|
+    t.integer  "coordinate_x"
+    t.integer  "coordinate_y"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "bot_id"
+  end
+
+  add_index "friend_supports", ["bot_id"], name: "index_friend_supports_on_bot_id"
 
   create_table "pins", force: :cascade do |t|
     t.string   "description"

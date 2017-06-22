@@ -1,0 +1,33 @@
+<div class="panel panel-default">
+  <div class="panel-heading">Listing buidlings</div>
+  <div class="panel-body">
+
+    <table class="table table-hover table-condensed">
+      <thead>
+        <tr>
+          <th>Coordinates</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @supports.each do |support| %>
+          <tr>
+            <td><%= "#{support.coordinate_x}, #{support.coordinate_y}" %></td>
+            <td><%= link_to 'Show', bot_friend_support_path(support.bot, support), class: "btn btn-primary" %></td>
+            <td><%= link_to 'Edit', edit_bot_friend_support_path(support.bot, support), class: "btn btn-primary" %></td>
+            <td><%= link_to 'Destroy', bot_friend_support_path(support.bot, support), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% if @supports.count < 5 %>
+      <%= link_to 'New friend', new_bot_friend_support_path, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+  <div class="panel-footer">
+    <%= link_to "Main page", root_path %> |
+    <%= link_to "Bots", bots_path %> |
+    <%= link_to "Buildings", bot_buildings_path %>
+  </div>
+</div>

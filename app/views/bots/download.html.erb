@@ -1,4 +1,5 @@
 =::bot()
+\::friendSupport()
 
 bot()
 {
@@ -18,7 +19,7 @@ bot()
 		<% @bot.buildings.where(type: 'production').each do |building| %>
 		MouseClick, Left, <%= building.coordinates %>
 		Sleep 500
-		MouseClick, Left, 430, 400
+		MouseClick, Left, <%= @bot.coordinates %>
 		Sleep 500
 		<% end %>
 		Sleep 310000
@@ -41,11 +42,23 @@ bot()
 			<% @bot.buildings.where(type: 'production').each do |building| %>
 			MouseClick, Left, <%= building.coordinates %>
 			Sleep 500
-			MouseClick, Left, 430, 400
+			MouseClick, Left, <%= @bot.coordinates %>
 			Sleep 500
 			<% end %>
 			Sleep 310000
 			i++
 		}
+	}
+}
+
+friendSupport()
+{
+	i = 0
+	while(i < 20)
+	{
+		<% @bot.friend_supports.each do |support| %>
+		MouseClick, Left, <%= support.coordinates %>
+		Sleep 1500
+		<% end %>
 	}
 }
