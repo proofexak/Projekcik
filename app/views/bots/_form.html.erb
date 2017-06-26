@@ -4,14 +4,6 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
-  <div class="form-group">
-    <%= f.label :coordinate_x %><br>
-    <%= f.number_field :coordinate_x %>
-  </div>
-  <div class="form-group">
-    <%= f.label :coordinate_y %><br>
-    <%= f.number_field :coordinate_y %>
-  </div>
   <div class="actions">
     <%= f.submit @bot.persisted? ? "Update bot" : "Create bot", class: "btn btn-primary" %>
   </div>
@@ -28,5 +20,4 @@
       </ul>
     </div>
   <% end %>
-
 <% end %>

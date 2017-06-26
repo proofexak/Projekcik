@@ -53,6 +53,7 @@ class FriendSupportsController < ApplicationController
   private
 
     def friend_support_params
-      params.require(:friend_support).permit(:coordinate_x, :coordinate_y)
+      params.require(:friend_support).permit(:coordinate_x, :coordinate_y,
+       :tavern_x, :tavern_y)
     end
 end

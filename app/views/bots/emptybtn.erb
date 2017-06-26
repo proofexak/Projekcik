@@ -1,19 +1,19 @@
 <div class="panel panel-default">
-  <div class="panel-heading">Next button</div>
+  <div class="panel-heading">Empty space button</div>
   <div class="panel-body">
 
-    <%= form_for @bot, :url => nextbtnupdate_bot_path do |f| %>
+    <%= form_for @bot, :url => emptybtnupdate_bot_path do |f| %>
     <div class="panel-body">
       <div class="form-group">
-        <%= f.label :next_x, 'Next button coord X'%><br>
-        <%= f.number_field :next_x %>
+        <%= f.label :empty_x, 'Empty space button coord X' %><br>
+        <%= f.number_field :empty_x %>
       </div>
       <div class="form-group">
-        <%= f.label :next_y, 'Next button coord Y' %><br>
-        <%= f.number_field :next_y %>
+        <%= f.label :empty_y, 'Empty space button coord Y' %><br>
+        <%= f.number_field :empty_y %>
       </div>
       <div class="actions">
-        <%= f.submit "Update Next button", class: "btn btn-primary" %>
+        <%= f.submit "Update Empty space button", class: "btn btn-primary" %>
       </div>
     </div>
   </div>

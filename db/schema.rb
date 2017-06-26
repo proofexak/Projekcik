@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170622162425) do
+ActiveRecord::Schema.define(version: 20170626100201) do
 
   create_table "bots", force: :cascade do |t|
     t.string   "name"
@@ -20,10 +20,14 @@ ActiveRecord::Schema.define(version: 20170622162425) do
     t.integer  "user_id"
     t.integer  "coordinate_x"
     t.integer  "coordinate_y"
-    t.integer  "tavern_x"
-    t.integer  "tavern_y"
     t.integer  "next_x"
     t.integer  "next_y"
+    t.integer  "close_x"
+    t.integer  "close_y"
+    t.integer  "empty_x"
+    t.integer  "empty_y"
+    t.integer  "neighbor_x"
+    t.integer  "neighbor_y"
   end
 
   add_index "bots", ["user_id"], name: "index_bots_on_user_id"
@@ -46,6 +50,8 @@ ActiveRecord::Schema.define(version: 20170622162425) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "bot_id"
+    t.integer  "tavern_x"
+    t.integer  "tavern_y"
   end
 
   add_index "friend_supports", ["bot_id"], name: "index_friend_supports_on_bot_id"

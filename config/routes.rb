@@ -9,6 +9,14 @@ Rails.application.routes.draw do
       get 'configuration'
       get 'nextbtn'
       patch 'nextbtnupdate'
+      get 'closebtn'
+      patch 'closebtnupdate'
+      get 'fiveminbtn'
+      patch 'fiveminbtnupdate'
+      get 'emptybtn'
+      patch 'emptybtnupdate'
+      get 'neighborbtn'
+      patch 'neighborbtnupdate'
     end
     resources :buildings
     resources :friend_supports

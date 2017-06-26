@@ -54,11 +54,35 @@ bot()
 friendSupport()
 {
 	i = 0
-	while(i < 20)
+	while(i < 19)
 	{
 		<% @bot.friend_supports.each do |support| %>
 		MouseClick, Left, <%= support.coordinates %>
 		Sleep 1500
+		MouseClick, Left, <%= @bot.closeCoords %>
+		Sleep 1500
+		MouseClick, Left, <%= support.tavernCoords %>
+		Sleep 1500
+		MouseClick, Left, <%= @bot.emptyCoords %>
+		Sleep 1500
 		<% end %>
+		MouseClick, Left, <%= @bot.nextCoords %>
+		Sleep 1000
+		i++
+	}
+	MouseClick, Left, <%= @bot.neighborCoords %>
+	Sleep 1000
+	i = 0
+	while(i < 19)
+	{
+		<% @bot.friend_supports.each do |support| %>
+		MouseClick, Left, <%= support.coordinates %>
+		Sleep 1500
+		MouseClick, Left, <%= @bot.closeCoords %>
+		Sleep 1500
+		<% end %>
+		MouseClick, Left, <%= @bot.nextCoords %>
+		Sleep 1000
+		i++
 	}
 }

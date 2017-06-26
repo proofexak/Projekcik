@@ -1,19 +1,19 @@
 <div class="panel panel-default">
-  <div class="panel-heading">Next button</div>
+  <div class="panel-heading">Neighbor button</div>
   <div class="panel-body">
 
-    <%= form_for @bot, :url => nextbtnupdate_bot_path do |f| %>
+    <%= form_for @bot, :url => neighborbtnupdate_bot_path do |f| %>
     <div class="panel-body">
       <div class="form-group">
-        <%= f.label :next_x, 'Next button coord X'%><br>
-        <%= f.number_field :next_x %>
+        <%= f.label :neighbor_x, 'Neighbor button coord X'%><br>
+        <%= f.number_field :neighbor_x %>
       </div>
       <div class="form-group">
-        <%= f.label :next_y, 'Next button coord Y' %><br>
-        <%= f.number_field :next_y %>
+        <%= f.label :neighbor_y, 'Neighbor button coord Y' %><br>
+        <%= f.number_field :neighbor_y %>
       </div>
       <div class="actions">
-        <%= f.submit "Update Next button", class: "btn btn-primary" %>
+        <%= f.submit "Update Neighbor button", class: "btn btn-primary" %>
       </div>
     </div>
   </div>
