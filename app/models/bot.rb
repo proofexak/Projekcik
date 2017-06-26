@@ -23,4 +23,9 @@ class Bot < ActiveRecord::Base
 	def neighborCoords
 		"#{neighbor_x}, #{neighbor_y}"
 	end
+
+	def supportBot
+ 		[close_x, close_y, empty_x, empty_y, next_x,
+		 next_y, neighbor_x, neighbor_y].compact.size >= 8
+	end
 end
