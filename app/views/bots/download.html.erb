@@ -51,7 +51,7 @@ bot()
 	}
 }
 
-<% if @bot.supportBot == true %>
+<% if @bot.all_filled?%>
 friendSupport()
 {
 	i = 0
@@ -60,18 +60,18 @@ friendSupport()
 		<% @bot.friend_supports.each do |support| %>
 		MouseClick, Left, <%= support.coordinates %>
 		Sleep 1500
-		MouseClick, Left, <%= @bot.closeCoords %>
+		MouseClick, Left, <%= @bot.close_coords %>
 		Sleep 1500
-		MouseClick, Left, <%= support.tavernCoords %>
+		MouseClick, Left, <%= support.tavern_coords %>
 		Sleep 1500
-		MouseClick, Left, <%= @bot.emptyCoords %>
+		MouseClick, Left, <%= @bot.empty_coords %>
 		Sleep 1500
 		<% end %>
-		MouseClick, Left, <%= @bot.nextCoords %>
+		MouseClick, Left, <%= @bot.next_coords %>
 		Sleep 1000
 		i++
 	}
-	MouseClick, Left, <%= @bot.neighborCoords %>
+	MouseClick, Left, <%= @bot.neighbor_coords %>
 	Sleep 1000
 	i = 0
 	while(i < 19)
@@ -79,10 +79,10 @@ friendSupport()
 		<% @bot.friend_supports.each do |support| %>
 		MouseClick, Left, <%= support.coordinates %>
 		Sleep 1500
-		MouseClick, Left, <%= @bot.closeCoords %>
+		MouseClick, Left, <%= @bot.close_coords %>
 		Sleep 1500
 		<% end %>
-		MouseClick, Left, <%= @bot.nextCoords %>
+		MouseClick, Left, <%= @bot.next_coords %>
 		Sleep 1000
 		i++
 	}

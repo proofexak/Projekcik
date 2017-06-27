@@ -54,83 +54,23 @@ class BotsController < ApplicationController
     @bot = current_user.bots.find(params[:id])
   end
 
-  def nextbtn
+  def edit_config
   	@bot = current_user.bots.find(params[:id])
   end
 
-  def nextbtnupdate
+  def update_config
   	@bot = current_user.bots.find(params[:id])
 
-  	if @bot.update(additional_bot_params)
-  		redirect_to configuration_bot_path, notice: 'Next button was successfully updated.'
-  	else
-  		render :nextbtn
-  	end
-  end
-
-  def fiveminbtn
-  	@bot = current_user.bots.find(params[:id])
-  end
-
-  def fiveminbtnupdate
-  	@bot = current_user.bots.find(params[:id])
-
-  	if @bot.update(additional_bot_params)
-  		redirect_to configuration_bot_path, notice: 'Five minutes button was successfully updated.'
-  	else
-  		render :fiveminbtn
-  	end
-  end
-
-  def closebtn
-  	@bot = current_user.bots.find(params[:id])
-  end
-
-  def closebtnupdate
-  	@bot = current_user.bots.find(params[:id])
-
-  	if @bot.update(additional_bot_params)
-  		redirect_to configuration_bot_path, notice: 'Close button was successfully updated.'
-  	else
-  		render :closebtn
-  	end
-  end
-
-  def emptybtn
-  	@bot = current_user.bots.find(params[:id])
-  end
-
-  def emptybtnupdate
-  	@bot = current_user.bots.find(params[:id])
-
-  	if @bot.update(additional_bot_params)
-  		redirect_to configuration_bot_path, notice: 'Empty space button was successfully updated.'
-  	else
-  		render :emptybtn
-  	end
-  end
-
-  def neighborbtn
-  	@bot = current_user.bots.find(params[:id])
-  end
-
-  def neighborbtnupdate
-  	@bot = current_user.bots.find(params[:id])
-
-  	if @bot.update(additional_bot_params)
-  		redirect_to configuration_bot_path, notice: 'Neighbor button was successfully updated.'
-  	else
-  		render :neighborbtn
-  	end
+		if @bot.update(bot_params)
+			redirect_to configuration_bot_path, notice: 'Config was successfully updated.'
+		else
+			render :edit
+		end
   end
 
 	private
 
   def bot_params
-  	params.require(:bot).permit(:name)
-  end
-
-  def additional_bot_params
   	params.require(:bot).permit(:next_x, :next_y, :empty_x, :empty_y,
   	 :coordinate_x, :coordinate_y, :close_x, :close_y, :neighbor_x, :neighbor_y)
   end

@@ -7,7 +7,7 @@ class FriendSupport < ActiveRecord::Base
 		"#{coordinate_x}, #{coordinate_y}"
 	end
 
-	def tavernCoords
+	def tavern_coords
 		"#{tavern_x}, #{tavern_y}"
 	end
 end

@@ -1,0 +1,27 @@
+<%= form_for @bot, :url => update_config_bot_path do |f| %>
+  <div class="panel-body">
+    <div class="form-group">
+      <%= f.label :next_x, 'Next button coord X'%><br>
+      <%= f.number_field :next_x %>
+    </div>
+    <div class="form-group">
+      <%= f.label :next_y, 'Next button coord Y' %><br>
+      <%= f.number_field :next_y %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Update Next button", class: "btn btn-primary" %>
+    </div>
+  </div>
+
+  <% if @bot.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bot.errors.count, "error") %> prohibited this bot from being saved:</h2>
+
+      <ul>
+      <% @bot.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% end %>

@@ -2,11 +2,11 @@
   <div class="panel-heading">Configuration</div>
   <div class="panel-body">
 
-    <%= link_to 'Next button', nextbtn_bot_path, class: "btn btn-primary" %>
-    <%= link_to 'Close button', closebtn_bot_path, class: "btn btn-primary" %>
-    <%= link_to 'Five minutes button', fiveminbtn_bot_path, class: "btn btn-primary" %>
-    <%= link_to 'Empty space button', emptybtn_bot_path, class: "btn btn-primary" %>
-    <%= link_to 'Neighbor button', neighborbtn_bot_path, class: "btn btn-primary" %>
+    <%= link_to 'Close button', edit_config_bot_path(@bot, form: :closebtn), class: "btn btn-primary" %>
+    <%= link_to 'Empty button', edit_config_bot_path(@bot, form: :emptybtn), class: "btn btn-primary" %>
+    <%= link_to 'Five minutes button', edit_config_bot_path(@bot, form: :fiveminbtn), class: "btn btn-primary" %>
+    <%= link_to 'Neighbor button', edit_config_bot_path(@bot, form: :neighborbtn), class: "btn btn-primary" %>
+    <%= link_to 'Next button', edit_config_bot_path(@bot, form: :nextbtn), class: "btn btn-primary" %>
   </div>
   <div class="panel-footer">
     <%= link_to "Main page", root_path %> |

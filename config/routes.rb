@@ -7,16 +7,8 @@ Rails.application.routes.draw do
     member do
       get 'download'
       get 'configuration'
-      get 'nextbtn'
-      patch 'nextbtnupdate'
-      get 'closebtn'
-      patch 'closebtnupdate'
-      get 'fiveminbtn'
-      patch 'fiveminbtnupdate'
-      get 'emptybtn'
-      patch 'emptybtnupdate'
-      get 'neighborbtn'
-      patch 'neighborbtnupdate'
+      get 'edit_config'
+      patch 'update_config'
     end
     resources :buildings
     resources :friend_supports

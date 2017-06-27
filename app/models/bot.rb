@@ -8,24 +8,28 @@ class Bot < ActiveRecord::Base
 		"#{coordinate_x}, #{coordinate_y}"
 	end
 
-	def closeCoords
+	def close_coords
 		"#{close_x}, #{close_y}"
 	end
 
-	def emptyCoords
+	def empty_coords
 		"#{empty_x}, #{empty_y}"
 	end
 
-	def nextCoords
+	def next_coords
 		"#{next_x}, #{next_y}"
 	end
 
-	def neighborCoords
+	def neighbor_coords
 		"#{neighbor_x}, #{neighbor_y}"
 	end
 
-	def supportBot
+	def support_bots
  		[close_x, close_y, empty_x, empty_y, next_x,
-		 next_y, neighbor_x, neighbor_y].compact.size >= 8
+		 next_y, neighbor_x, neighbor_y]
+	end
+
+	def all_filled?
+		support_bots.compact.size >= support_bots.size
 	end
 end
