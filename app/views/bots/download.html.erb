@@ -28,7 +28,7 @@ bot()
 		<% @bot.buildings.where(type: 'production').each do |building| %>
 		MouseClick, Left, <%= building.coordinates %>
 		Sleep 500
-		MouseClick, Left, <%= @bot.coordinates %>
+		MouseClick, Left, <%= @config.fivemin_coords %>
 		Sleep 500
 		<% end %>
 		Sleep 310000
@@ -51,7 +51,7 @@ bot()
 			<% @bot.buildings.where(type: 'production').each do |building| %>
 			MouseClick, Left, <%= building.coordinates %>
 			Sleep 500
-			MouseClick, Left, <%= @bot.coordinates %>
+			MouseClick, Left, <%= @config.fivemin_coords %>
 			Sleep 500
 			<% end %>
 			Sleep 310000
