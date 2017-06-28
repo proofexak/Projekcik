@@ -1,5 +1,6 @@
 class BotsController < ApplicationController
 	before_action :authenticate_user!
+	include BotsHelper
 
 	def index
 		@bots = current_user.bots
@@ -27,7 +28,7 @@ class BotsController < ApplicationController
 		@bot = current_user.bots.find(params[:id])
 
 		if @bot.update(bot_params)
-			redirect_to bots_path, notice: 'Bot was successfully updated.'
+			update_redirect(@bot, params[:form])
 		else
 			render :edit
 		end
@@ -54,24 +55,10 @@ class BotsController < ApplicationController
     @bot = current_user.bots.find(params[:id])
   end
 
-  def edit_config
-  	@bot = current_user.bots.find(params[:id])
-  end
-
-  def update_config
-  	@bot = current_user.bots.find(params[:id])
-
-		if @bot.update(bot_params)
-			redirect_to configuration_bot_path, notice: 'Config was successfully updated.'
-		else
-			render :edit
-		end
-  end
-
 	private
 
   def bot_params
-  	params.require(:bot).permit(:next_x, :next_y, :empty_x, :empty_y,
+  	params.require(:bot).permit(:name, :next_x, :next_y, :empty_x, :empty_y,
   	 :coordinate_x, :coordinate_y, :close_x, :close_y, :neighbor_x, :neighbor_y)
   end
 
