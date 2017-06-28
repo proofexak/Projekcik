@@ -1,6 +1,15 @@
+<% if @bot.type == 'production' %>
 =::bot()
+<% end %>
+<% if @bot.type == 'support' %>
 \::friendSupport()
+<% end %>
 
+
+<% if @bot.type == 'production' %>
+	<%if @bot.buildings.count == 0 %>
+Nie wprowadziłeś żadnego budynku!
+	<% else %>
 bot()
 {
 	while(true)
@@ -50,8 +59,11 @@ bot()
 		}
 	}
 }
+	<% end %>
+<% end %>
 
-<% if @bot.all_filled?%>
+<% if @bot.type == 'support' %>
+	<% if @config.all_filled? %>
 friendSupport()
 {
 	i = 0
@@ -59,32 +71,43 @@ friendSupport()
 	{
 		<% @bot.friend_supports.each do |support| %>
 		MouseClick, Left, <%= support.coordinates %>
-		Sleep 1500
-		MouseClick, Left, <%= @bot.close_coords %>
-		Sleep 1500
+		Sleep 1000
+		MouseClick, Left, <%= @config.close_coords %>
+		Sleep 500
+		MouseClick, Left, <%= @config.empty_coords %>
+		Sleep 500
 		MouseClick, Left, <%= support.tavern_coords %>
 		Sleep 1500
-		MouseClick, Left, <%= @bot.empty_coords %>
-		Sleep 1500
+		MouseClick, Left, <%= @config.empty_coords %>
+		Sleep 500
 		<% end %>
-		MouseClick, Left, <%= @bot.next_coords %>
-		Sleep 1000
+		MouseClick, Left, <%= @config.next_coords %>
+		Sleep 500
 		i++
 	}
-	MouseClick, Left, <%= @bot.neighbor_coords %>
+	MouseClick, Left, <%= @config.neighbor_coords %>
 	Sleep 1000
 	i = 0
 	while(i < 19)
 	{
 		<% @bot.friend_supports.each do |support| %>
 		MouseClick, Left, <%= support.coordinates %>
-		Sleep 1500
-		MouseClick, Left, <%= @bot.close_coords %>
-		Sleep 1500
-		<% end %>
-		MouseClick, Left, <%= @bot.next_coords %>
 		Sleep 1000
+		MouseClick, Left, <%= @config.close_coords %>
+		Sleep 500
+		MouseClick, Left, <%= @config.empty_coords %>
+		Sleep 500
+		<% end %>
+		MouseClick, Left, <%= @config.next_coords %>
+		Sleep 500
 		i++
 	}
 }
+<% else %>
+Bot wspomagający przyjaciół nie został stworzony!
+Nie podałeś wszystkich koordynatów!
+Wejdź w Configuration i sprawdź, których brakuje!
+	<% end %>
 <% end %>
+
+Esc::ExitApp

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :configurations
   resources :pins
   devise_for :users
   root 'home#index'
@@ -6,9 +7,12 @@ Rails.application.routes.draw do
   resources :bots do
     member do
       get 'download'
-      get 'configuration'
-      get 'edit_config'
-      patch 'update_config'
+    end
+    resources :configurations do
+      member do
+        get 'friend_config'
+        get 'production_config'
+      end
     end
     resources :buildings
     resources :friend_supports

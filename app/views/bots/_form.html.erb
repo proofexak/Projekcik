@@ -4,6 +4,10 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
+  <div class="form-group">
+    <%= f.label :type %><br>
+    <%= f.select :type, [["Production", 'production'], ["Support friends", 'support']], {prompt: "Please select"}, class: "form-control" %>
+  </div>
   <div class="actions">
     <%= f.submit @bot.persisted? ? "Update bot" : "Create bot", class: "btn btn-primary" %>
   </div>

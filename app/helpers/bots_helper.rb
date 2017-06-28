@@ -2,7 +2,7 @@ module BotsHelper
 
 	def bot_back_path(bot)
 		if params[:form]
-			configuration_bot_path(bot)
+			bot_configurations_path(bot)
 		else
 			bots_path
 		end

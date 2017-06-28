@@ -1,0 +1,15 @@
+<div class="panel panel-default">
+  <div class="panel-heading">Configuration</div>
+  <div class="panel-body">
+
+    <%= link_to 'Close button',  edit_bot_configuration_path(@config.bot, @config, form: :close), class: "btn btn-primary" %>
+    <%= link_to 'Empty button',  edit_bot_configuration_path(@config.bot, @config, form: :empty), class: "btn btn-primary" %>
+    <%= link_to 'Neighbor button',  edit_bot_configuration_path(@config.bot, @config, form: :neighbor), class: "btn btn-primary" %>
+    <%= link_to 'Next button',  edit_bot_configuration_path(@config.bot, @config, form: :next), class: "btn btn-primary" %>
+  </div>
+  <div class="panel-footer">
+    <%= link_to "Main page", root_path %> |
+    <%= link_to "Bots", bots_path %> |
+    <%= link_to "Friends", bot_friend_supports_path(@bot) %>
+  </div>
+</div>

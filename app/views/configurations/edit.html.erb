@@ -1,0 +1,9 @@
+<div class="panel panel-default">
+	<div class="panel-heading">Edit config</div>
+
+<%= render params[:form] || 'form' %>
+
+	<div class="panel-footer">
+		<%= link_to 'Back', which_config(@bot, @config) %>
+	</div>
+</div>

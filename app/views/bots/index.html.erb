@@ -6,6 +6,7 @@
       <thead>
         <tr>
           <th>Name</th>
+          <th>Type</th>
           <th colspan="7"></th>
         </tr>
       </thead>
@@ -14,12 +15,17 @@
         <% @bots.each do |bot| %>
           <tr>
             <td><%= bot.name %></td>
+            <td><%= bot.type.capitalize %></td>
             <td><%= link_to 'Show', bot, class: "btn btn-primary" %></td>
             <td><%= link_to 'Edit', edit_bot_path(bot), class: "btn btn-primary" %></td>
             <td><%= link_to 'Destroy', bot, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %></td>
-            <td><%= link_to 'Buildings', bot_buildings_path(bot), class: "btn btn-primary" %></td>
-            <td><%= link_to 'Support', bot_friend_supports_path(bot), class: "btn btn-primary" %></td>
-            <td><%= link_to 'Configuration', configuration_bot_path(bot), class: "btn btn-primary"%></td>
+            <% if bot.type == 'production'  %>
+              <td><%= link_to 'Buildings', bot_buildings_path(bot), class: "btn btn-primary" %></td>
+            <% end %>
+            <% if bot.type == 'support'%>
+              <td><%= link_to 'Support', bot_friend_supports_path(bot), class: "btn btn-primary" %></td>
+            <% end %>
+            <td><%= link_to 'Configuration', which_config(bot, bot.configuration), class: "btn btn-primary"%></td>
             <td><%=  link_to 'Download', download_bot_path(bot), class: "btn btn-primary", target: '_blank' %></td>
           </tr>
         <% end %>

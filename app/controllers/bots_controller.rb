@@ -12,9 +12,9 @@ class BotsController < ApplicationController
 
 	def create
 		@bot = current_user.bots.new(bot_params)
-		
+
 		if @bot.save
-			redirect_to bots_path, notice: 'Bot was successfully created.'
+			redirect_to new_bot_configuration_path(@bot), notice: 'Bot was successfully created.'
 		else
 			render :new
 		end
@@ -47,6 +47,7 @@ class BotsController < ApplicationController
 
 	def download
 		@bot = current_user.bots.find(params[:id])
+		@config = @bot.configuration
 
 		send_data render_to_string('bots/download', layout: false), filename: "#{@bot.name}.ahk"
 	end
@@ -58,7 +59,7 @@ class BotsController < ApplicationController
 	private
 
   def bot_params
-  	params.require(:bot).permit(:name, :next_x, :next_y, :empty_x, :empty_y,
+  	params.require(:bot).permit(:name, :type, :next_x, :next_y, :empty_x, :empty_y,
   	 :coordinate_x, :coordinate_y, :close_x, :close_y, :neighbor_x, :neighbor_y)
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170627100208) do
+ActiveRecord::Schema.define(version: 20170628105526) do
 
   create_table "bots", force: :cascade do |t|
     t.string   "name"
@@ -28,19 +28,10 @@ ActiveRecord::Schema.define(version: 20170627100208) do
     t.integer  "empty_y"
     t.integer  "neighbor_x"
     t.integer  "neighbor_y"
+    t.string   "type"
   end
 
   add_index "bots", ["user_id"], name: "index_bots_on_user_id"
-
-  create_table "bots_friend_supports", force: :cascade do |t|
-    t.integer  "bot_id"
-    t.integer  "friend_support_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-  end
-
-  add_index "bots_friend_supports", ["bot_id"], name: "index_bots_friend_supports_on_bot_id"
-  add_index "bots_friend_supports", ["friend_support_id"], name: "index_bots_friend_supports_on_friend_support_id"
 
   create_table "buildings", force: :cascade do |t|
     t.string   "name"
@@ -53,6 +44,24 @@ ActiveRecord::Schema.define(version: 20170627100208) do
   end
 
   add_index "buildings", ["bot_id"], name: "index_buildings_on_bot_id"
+
+  create_table "configurations", force: :cascade do |t|
+    t.integer  "bot_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "fivemin_y"
+    t.integer  "fivemin_x"
+    t.integer  "next_x"
+    t.integer  "next_y"
+    t.integer  "empty_x"
+    t.integer  "empty_y"
+    t.integer  "close_x"
+    t.integer  "close_y"
+    t.integer  "neighbor_x"
+    t.integer  "neighbor_y"
+  end
+
+  add_index "configurations", ["bot_id"], name: "index_configurations_on_bot_id"
 
   create_table "friend_supports", force: :cascade do |t|
     t.integer  "coordinate_x"

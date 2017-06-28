@@ -1,12 +1,10 @@
 <div class="panel panel-default">
 	<div class="panel-heading">Edit bot</div>
 
-<%= render params[:form] || 'form' %>
+<%= render 'form' %>
 
 	<div class="panel-footer">
-		<% if params[:form] == nil %>
-			<%= link_to 'Show', bot_path(@bot) %> |
-		<% end %>
-		<%= link_to 'Back', bot_back_path(@bot) %>
+		<%= link_to 'Show', bot_path(@bot) %> |
+		<%= link_to 'Back', bots_path %>
 	</div>
 </div>
