@@ -56,6 +56,14 @@ class BotsController < ApplicationController
     @bot = current_user.bots.find(params[:id])
   end
 
+	def update_redirect(bot, form)
+		if form
+			redirect_to configuration_bot_path(bot), notice: 'Config was successfully updated.'
+		else
+			redirect_to bots_path, notice: 'Bot was successfully updated.'
+		end
+	end
+
 	private
 
   def bot_params

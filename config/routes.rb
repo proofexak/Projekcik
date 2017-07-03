@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :configurations
+  resources :probabilities do
+    collection do
+      get :add_quant
+      get :subtract_quant
+    end
+  end
   resources :pins
   devise_for :users
   root 'home#index'

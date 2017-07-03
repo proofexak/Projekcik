@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170628105526) do
+ActiveRecord::Schema.define(version: 20170703105502) do
 
   create_table "bots", force: :cascade do |t|
     t.string   "name"
@@ -87,6 +87,20 @@ ActiveRecord::Schema.define(version: 20170628105526) do
   end
 
   add_index "pins", ["user_id"], name: "index_pins_on_user_id"
+
+  create_table "probabilities", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "gold",               default: 0
+    t.integer  "supply",             default: 0
+    t.integer  "raws",               default: 0
+    t.integer  "medals",             default: 0
+    t.integer  "development_points", default: 0
+    t.integer  "diamonds",           default: 0
+  end
+
+  add_index "probabilities", ["user_id"], name: "index_probabilities_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
