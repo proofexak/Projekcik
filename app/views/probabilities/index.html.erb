@@ -14,11 +14,11 @@
 
       <tbody>
         <% ["Gold", "Supply", "Raw materials", "Medals",
-         "Develompent points", "Diamonds"].each do |name| %>
+         "Development points", "Diamonds"].each do |name| %>
           <tr>
             <td><%= name %></td>
             <td><%= which_quantity(name, @probability) %></td>
-            <td><%= ((which_quantity(name, @probability) / total(@probability).to_f) * 100).round(2) %>%</td>
+            <td><%= percentage(name, @probability) %>%</td>
             <td><%= link_to '+', add_quant_probabilities_path(name: name), class: "btn btn-primary" %></td>
             <td><%= link_to '-', subtract_quant_probabilities_path(name: name), class: "btn btn-primary" %></td>
           </tr>
@@ -26,11 +26,18 @@
       </tbody>
     </table>
     Total: <%= total(@probability) %>
+   <%= link_to 'Destroy', probability_path(@probability), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
   </div>
   <div class="panel-footer">
     <%= link_to "Main page", root_path %> |
     <%= link_to "Bots", bots_path %>
   </div>
-
-  <%= @chart.render() %>
+  <div class="row">
+    <div class="col-md-6" id="chart-container">
+      <%= @chart.render() %>
+    </div>
+    <div class="col-md-6" id="chart-container2">
+      <%= @chart2.render() %>
+    </div>
+  </div>
 </div>

@@ -1,5 +1,6 @@
 class ProbabilitiesController < ApplicationController
-  before_action :set_probability, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  include ActionView::Helpers::NumberHelper
   include ProbabilitiesHelper
 
   def index
@@ -7,126 +8,88 @@ class ProbabilitiesController < ApplicationController
       redirect_to new_probability_path
     else
       @probability = current_user.probability
+      @allprob = Probability.all
+      @allpercentage = { "Gold" => 0, "Supply" => 0, "Medals" => 0, "Raw materials" => 0,
+     "Development points" => 0, "Diamonds" => 0, "Total" => 0}
+      all_percentage(@allprob, @allpercentage)
       @chart = Fusioncharts::Chart.new({
-      :height => 400,
-      :width => 600,
-      :id => 'chart',
-      :type => 'column2d',
-      :renderAt => 'chart-container',
-      :dataSource => '{
-          "chart": {
-              "caption": "Monthly revenue for last year",
-              "subCaption": "Harrys SuperMart",
-              "xAxisName": "Month",
-              "yAxisName": "Revenues (In USD)",
-              "numberPrefix": "$",
-              "theme": "zune"
-          },
-          "data": [{
-              "label": "Jan",
-              "value": "420000"
+        :height => number_to_percentage(100),
+        :width => number_to_percentage(100),
+        :type => 'pie3d',
+        :renderAt => 'chart-container',
+        :dataSource => {
+          :chart => {
+                :caption => 'Your percentage probability for Hedge Maze',
+                :xAxisname => 'Item',
+                :yAxisName => 'Percentage (%)',
+                :numberSuffix => '%',
+                :theme => 'fint',
+            },
+              :data => [{
+              "label": "Gold",
+              "value": percentage("Gold", @probability)
           }, {
-              "label": "Feb",
-              "value": "810000"
+              "label": "Supply",
+              "value": percentage("Supply", @probability)
           }, {
-              "label": "Mar",
-              "value": "720000"
+              "label": "Diamonds",
+              "value": percentage("Diamonds", @probability)
           }, {
-              "label": "Apr",
-              "value": "550000"
+              "label": "Development points",
+              "value": percentage("Development points", @probability)
           }, {
-              "label": "May",
-              "value": "910000"
+              "label": "Raw materials",
+              "value": percentage("Raw materials", @probability)
           }, {
-              "label": "Jun",
-              "value": "510000"
-          }, {
-              "label": "Jul",
-              "value": "680000"
-          }, {
-              "label": "Aug",
-              "value": "620000"
-          }, {
-              "label": "Sep",
-              "value": "610000"
-          }, {
-              "label": "Oct",
-              "value": "490000"
-          }, {
-              "label": "Nov",
-              "value": "900000"
-          }, {
-              "label": "Dec",
-              "value": "730000"
+              "label": "Medals",
+              "value": percentage("Medals", @probability)
           }]
-      }'
-  })
-    end
-  end
+          }
+      })
 
-  def fc_json
-    @chart = Fusioncharts::Chart.new({
-      :height => 400,
-      :width => 600,
-      :id => 'chart',
-      :type => 'column2d',
-      :renderAt => 'chart-container',
-      :dataSource => '{
-          "chart": {
-              "caption": "Monthly revenue for last year",
-              "subCaption": "Harrys SuperMart",
-              "xAxisName": "Month",
-              "yAxisName": "Revenues (In USD)",
-              "numberPrefix": "$",
-              "theme": "zune"
-          },
-          "data": [{
-              "label": "Jan",
-              "value": "420000"
-          }, {
-              "label": "Feb",
-              "value": "810000"
-          }, {
-              "label": "Mar",
-              "value": "720000"
-          }, {
-              "label": "Apr",
-              "value": "550000"
-          }, {
-              "label": "May",
-              "value": "910000"
-          }, {
-              "label": "Jun",
-              "value": "510000"
-          }, {
-              "label": "Jul",
-              "value": "680000"
-          }, {
-              "label": "Aug",
-              "value": "620000"
-          }, {
-              "label": "Sep",
-              "value": "610000"
-          }, {
-              "label": "Oct",
-              "value": "490000"
-          }, {
-              "label": "Nov",
-              "value": "900000"
-          }, {
-              "label": "Dec",
-              "value": "730000"
-          }]
-      }'
-  })
+    @chart2 = Fusioncharts::Chart.new({
+        :height => number_to_percentage(100),
+        :width => number_to_percentage(100),
+        :type => 'pie3d',
+        :renderAt => 'chart-container2',
+        :dataSource => {
+          :chart => {
+                :caption => 'Percentage probability for Hedge Maze',
+                :xAxisname => 'Item',
+                :yAxisName => 'Percentage (%)',
+                :numberSuffix => '%',
+                :theme => 'fint',
+            },
+              :data => [{
+                  "label": "Gold",
+                  "value": @allpercentage["Gold"]
+              }, {
+                  "label": "Supply",
+                  "value": @allpercentage["Supply"]
+              }, {
+                  "label": "Diamonds",
+                  "value": @allpercentage["Diamonds"]
+              }, {
+                  "label": "Development points",
+                  "value": @allpercentage["Development points"]
+              }, {
+                  "label": "Raw materials",
+                  "value": @allpercentage["Raw materials"]
+              }, {
+                  "label": "Medals",
+                  "value": @allpercentage["Medals"]
+              }]
+          }
+      })
+    end
   end
 
   def new
     @probability = current_user.build_probability
     if @probability.save
-      redirect_to probabilities_path, notice: 'Wszystko git'
+      redirect_to probabilities_path, notice: 'Probability created.'
     else
-      redirect_to probabilities_path, notice: 'Wszystko źle'
+      redirect_to probabilities_path, notice: 'Probability wasnt created.'
     end
   end
 
@@ -141,16 +104,16 @@ class ProbabilitiesController < ApplicationController
       @probability.supply += 1
     elsif @name == "Raw materials"
       @probability.raws += 1
-    elsif @name == "Develompent points"
+    elsif @name == "Development points"
       @probability.development_points += 1
     elsif @name == "Diamonds"
       @probability.diamonds += 1
     end
 
     if @probability.save
-      redirect_to probabilities_path, notice: 'Wszystko git'
+      redirect_to probabilities_path, notice: 'Probability updated'
     else
-      redirect_to probabilities_path, notice: 'Wszystko źle'
+      redirect_to probabilities_path, notice: 'Probability not updated.'
     end
   end
 
@@ -173,7 +136,7 @@ class ProbabilitiesController < ApplicationController
       if @probability.raws > 0
         @probability.raws -= 1
       end
-    elsif @name == "Develompent points"
+    elsif @name == "Development points"
       if @probability.development_points > 0
         @probability.development_points -= 1
       end
@@ -191,6 +154,9 @@ class ProbabilitiesController < ApplicationController
   end
 
   def destroy
+    @probability = current_user.probability
+    @probability.destroy
+    redirect_to root_path, notice: 'Destroyed probability'
   end
 
 end
