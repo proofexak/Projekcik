@@ -21,7 +21,11 @@ module ProbabilitiesHelper
 	end
 
 	def percentage(name, prob)
-		((which_quantity(name, prob) / total(prob).to_f) * 100).round(2)
+		if ((which_quantity(name, prob) / total(prob).to_f) * 100).round(2).nan?
+			0
+		else
+			((which_quantity(name, prob) / total(prob).to_f) * 100).round(2)
+		end
 	end
 
 	def all_percentage(allprob, alltable)
